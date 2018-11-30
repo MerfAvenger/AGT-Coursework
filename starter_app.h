@@ -10,6 +10,7 @@
 #include "World.h"
 #include "primitive_builder.h"
 #include <list>
+#include "StateManager.h"
 
 // FRAMEWORK FORWARD DECLARATIONS
 namespace gef
@@ -38,6 +39,8 @@ private:
 	void DrawHUD();
 	void SetupLights();
 	void SetupCamera();
+
+	StateManager* m_stateManager;
 
 	gef::SpriteRenderer* sprite_renderer_;
 	gef::Renderer3D* renderer_3d_;

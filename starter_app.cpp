@@ -30,6 +30,8 @@ StarterApp::StarterApp(gef::Platform& platform) :
 
 void StarterApp::Init()
 {
+	m_stateManager = new StateManager(platform_);
+
 	sprite_renderer_ = gef::SpriteRenderer::Create(platform_);
 	renderer_3d_ = gef::Renderer3D::Create(platform_);
 	input_manager_ = gef::InputManager::Create(platform_);
@@ -81,45 +83,7 @@ bool StarterApp::Update(float frame_time)
 		gef::Keyboard* keyboard = input_manager_->keyboard();
 		if (keyboard)
 		{
-			/*if (keyboard->IsKeyDown(gef::Keyboard::KC_UP))
-			{
-				GameObject movedPlayer = player_;
-				movedPlayer.SetPosition(gef::Vector4(player_.GetPosition().x(), player_.GetPosition().y(), player_.GetPosition().z() + 10));
-				if (!AABB(movedPlayer, player2_))
-					player_.SetPosition(gef::Vector4(player_.GetPosition().x() + 10, player_.GetPosition().y(), player_.GetPosition().z() + 10));
-
-				movedPlayer = GameObject();
-			}
-
-			if (keyboard->IsKeyDown(gef::Keyboard::KC_SPACE))
-			{
-				GameObject movedPlayer = player_;
-				movedPlayer.SetPosition(gef::Vector4(player_.GetPosition().x(), player_.GetPosition().y(), player_.GetPosition().z() + 10));
-				if (!AABB(movedPlayer, player2_))
-					player_.SetPosition(gef::Vector4(player_.GetPosition().x() + 10, player_.GetPosition().y(), player_.GetPosition().z() + 10));
-
-				movedPlayer = GameObject();
-			}
-
-			if (keyboard->IsKeyDown(gef::Keyboard::KC_SPACE))
-			{
-				GameObject movedPlayer = player_;
-				movedPlayer.SetPosition(gef::Vector4(player_.GetPosition().x(), player_.GetPosition().y(), player_.GetPosition().z() + 10));
-				if (!AABB(movedPlayer, player2_))
-					player_.SetPosition(gef::Vector4(player_.GetPosition().x() + 10, player_.GetPosition().y(), player_.GetPosition().z() + 10));
-
-				movedPlayer = GameObject();
-			}
-
-			if (keyboard->IsKeyDown(gef::Keyboard::KC_SPACE))
-			{
-				GameObject movedPlayer = player_;
-				movedPlayer.SetPosition(gef::Vector4(player_.GetPosition().x(), player_.GetPosition().y(), player_.GetPosition().z() + 10));
-				if (!AABB(movedPlayer, player2_))
-					player_.SetPosition(gef::Vector4(player_.GetPosition().x() + 10, player_.GetPosition().y(), player_.GetPosition().z() + 10));
-
-				movedPlayer = GameObject();
-			}*/
+			
 		}
 	}
 
