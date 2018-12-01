@@ -67,7 +67,6 @@ bool StarterApp::Update(float frame_time)
 {
 	fps_ = 1.0f / frame_time;
 
-
 	// read input devices
 	if (input_manager_)
 	{
@@ -87,36 +86,39 @@ bool StarterApp::Update(float frame_time)
 		}
 	}
 
+	m_stateManager->Update(platform_);
 
 	return true;
 }
 
 void StarterApp::Render()
 {
-	gef::Matrix44 projection_matrix;
-	gef::Matrix44 view_matrix;
+	//gef::Matrix44 projection_matrix;
+	//gef::Matrix44 view_matrix;
 
-	projection_matrix = platform_.PerspectiveProjectionFov(camera_fov_, (float)platform_.width() / (float)platform_.height(), near_plane_, far_plane_);
-	view_matrix.LookAt(camera_eye_, camera_lookat_, camera_up_);
-	renderer_3d_->set_projection_matrix(projection_matrix);
-	renderer_3d_->set_view_matrix(view_matrix);
+	//projection_matrix = platform_.PerspectiveProjectionFov(camera_fov_, (float)platform_.width() / (float)platform_.height(), near_plane_, far_plane_);
+	//view_matrix.LookAt(camera_eye_, camera_lookat_, camera_up_);
+	//renderer_3d_->set_projection_matrix(projection_matrix);
+	//renderer_3d_->set_view_matrix(view_matrix);
 
-	// draw meshes here
-	renderer_3d_->Begin();
+	//// draw meshes here
+	//renderer_3d_->Begin();
 
-	// draw 3d stuff here
-	for(int i = 0; i < world->WorldObjects().size(); i++)
-	{
-		renderer_3d_->DrawMesh(world->WorldObjects().at(i));
-	}
+	//// draw 3d stuff here
+	//for(int i = 0; i < world->WorldObjects().size(); i++)
+	//{
+	//	renderer_3d_->DrawMesh(world->WorldObjects().at(i));
+	//}
 
-	renderer_3d_->End();
+	//renderer_3d_->End();
 
-	// setup the sprite renderer, but don't clear the frame buffer
-	// draw 2D sprites here
-	sprite_renderer_->Begin(false);
-	DrawHUD();
-	sprite_renderer_->End();
+	//// setup the sprite renderer, but don't clear the frame buffer
+	//// draw 2D sprites here
+	//sprite_renderer_->Begin(false);
+	//DrawHUD();
+	//sprite_renderer_->End();
+
+	m_stateManager->Render(platform_);
 }
 void StarterApp::InitFont()
 {

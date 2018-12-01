@@ -23,6 +23,8 @@ public:
 
 	StateManager(gef::Platform &platform);
 	~StateManager();
+	int Update(gef::Platform &platform);
+	void Render(gef::Platform &platform);
 
 	void StateUpdate(gef::Platform &platform);
 

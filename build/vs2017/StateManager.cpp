@@ -27,21 +27,39 @@ BaseState* StateManager::Morph(APPLICATION_STATE newState, gef::Platform &platfo
 
 StateManager::StateManager(gef::Platform &platform)
 {
+	//Initialise states
 	m_currentState = splash;
-	m_lastState = m_currentState;
+	m_lastState = def;
 
-	m_state = Morph(m_currentState, platform);
+	//Begin update
+	StateUpdate(platform);
 }
 
 StateManager::~StateManager()
 {
+	m_state->~BaseState();
+	delete m_state;
+	m_state = nullptr;
+}
+
+int StateManager::Update(gef::Platform &platform)
+{
+	return m_state->Update(platform);
+}
+
+void StateManager::Render(gef::Platform & platform)
+{
+	m_state->Render(platform);
 }
 
 void StateManager::StateUpdate(gef::Platform &platform)
 {
-	if (m_lastState != m_currentState)
+	//while(returnValue != -1)
 	{
-		m_state = Morph(m_currentState, platform);
-	}
-		
+		if (m_lastState != m_currentState)
+		{
+			//Set up appropriate child state if the state has changed
+			m_state = Morph(m_currentState, platform);
+		}	
+	}	
 }

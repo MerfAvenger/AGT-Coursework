@@ -16,8 +16,9 @@ void MenuState::Init(gef::Platform &platform)
 	Run();
 }
 
-void MenuState::Update()
+int MenuState::Update(gef::Platform &platform)
 {
+	return -1;
 }
 
 void MenuState::Cleanup()

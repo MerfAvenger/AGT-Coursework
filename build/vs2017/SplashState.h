@@ -29,12 +29,13 @@ public:
 	~SplashState();
 
 	void Init(gef::Platform &platform) override;
+	void InitCamera();
 	void InitRendering(gef::Platform &platform) override;
 	void InitFont(gef::Platform &platform);
 
-	void Update() override;
+	int Update(gef::Platform &platform) override;
 	void Cleanup() override;
-	void Render() override;
+	void Render(gef::Platform &platform) override;
 };
 
 #endif

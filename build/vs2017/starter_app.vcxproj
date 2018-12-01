@@ -219,6 +219,7 @@
     <ClCompile Include="..\..\starter_app.cpp" />
     <ClCompile Include="BaseState.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameState.cpp" />
     <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="SplashState.cpp" />
     <ClCompile Include="StateManager.cpp" />
@@ -229,6 +230,7 @@
     <ClInclude Include="..\..\starter_app.h" />
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameState.h" />
     <ClInclude Include="MenuState.h" />
     <ClInclude Include="SplashState.h" />
     <ClInclude Include="StateManager.h" />

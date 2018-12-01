@@ -10,15 +10,16 @@ void BaseState::InitRendering(gef::Platform & platform)
 {
 }
 
-void BaseState::Update()
+int BaseState::Update(gef::Platform &platform)
 {
+	return -1;
 }
 
 void BaseState::Cleanup()
 {
 }
 
-void BaseState::Render()
+void BaseState::Render(gef::Platform &platform)
 {
 }
 

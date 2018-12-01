@@ -5,6 +5,8 @@
 #include "graphics/image_data.h"
 #include "graphics/texture.h"
 #include "graphics/sprite.h"
+#include "system/platform.h"
+#include "maths/math_utils.h"
 
 
 SplashState::SplashState()
@@ -19,13 +21,22 @@ SplashState::~SplashState()
 void SplashState::Init(gef::Platform &platform)
 {
 	InitRendering(platform);
+	InitCamera();
 
 	InitFont(platform);
-
-	Update();
 }
 
-void SplashState::InitRendering(gef::Platform & platform)
+void SplashState::InitCamera()
+{
+	camera_eye_ = gef::Vector4(-500.0f, 5.0f, 5.0f);
+	camera_lookat_ = gef::Vector4(0.0f, 0.0f, 0.0f);
+	camera_up_ = gef::Vector4(0.0f, 1.0f, 0.0f);
+	camera_fov_ = gef::DegToRad(45.0f);
+	near_plane_ = 0.01f;
+	far_plane_ = 100.f;
+}
+
+void SplashState::InitRendering(gef::Platform &platform)
 {
 	m_spriteRenderer = gef::SpriteRenderer::Create(platform);
 	m_imageLoader = new gef::PNGLoader();
@@ -34,7 +45,7 @@ void SplashState::InitRendering(gef::Platform & platform)
 
 	m_imageLoader->Load("splashTest.png", platform, *m_background);
 	
-	if (m_background);
+	if (m_background)
 	{
 		m_bgTex = gef::Texture::Create(platform, *m_background);
 
@@ -51,23 +62,28 @@ void SplashState::InitFont(gef::Platform &platform)
 	m_font->Load("comic_sans");
 }
 
-void SplashState::Update()
+int SplashState::Update(gef::Platform &platform)
 {
 	bool cont = true;
+	int returnValue = 0;
 
-	while (cont)
+	//while (cont)
 	{
-		Render();
+		Render(platform);
 	}
+
+	return returnValue;
 }
 
 void SplashState::Cleanup()
 {
 }
 
-void SplashState::Render()
+void SplashState::Render(gef::Platform &platform)
 {
-	m_spriteRenderer->Begin();
+	//m_spriteRenderer->set_projection_matrix(platform.PerspectiveProjectionFov(camera_fov_, (float)platform.width() / (float)platform.height(), near_plane_, far_plane_));
+
+	m_spriteRenderer->Begin(false);
 
 	m_spriteRenderer->DrawSprite(*m_bgSprite);
 

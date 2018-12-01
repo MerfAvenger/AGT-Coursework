@@ -12,7 +12,7 @@ public:
 	~MenuState();
 
 	void Init(gef::Platform &platform) override;
-	void Update() override;
+	int Update(gef::Platform &platform) override;
 	void Cleanup() override;
 };
 
