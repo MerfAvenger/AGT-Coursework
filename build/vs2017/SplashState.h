@@ -29,13 +29,15 @@ public:
 	~SplashState();
 
 	void Init(gef::Platform &platform) override;
-	void InitCamera();
 	void InitRendering(gef::Platform &platform) override;
 	void InitFont(gef::Platform &platform);
 
-	int Update(gef::Platform &platform) override;
+	int Update(gef::Platform &platform, float deltaTime) override;
 	void Cleanup() override;
 	void Render(gef::Platform &platform) override;
+
+	gef::Font* passFonts() { return m_font; }
+	gef::SpriteRenderer* passRenderer() { return m_spriteRenderer; }
 };
 
 #endif

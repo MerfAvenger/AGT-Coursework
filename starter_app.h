@@ -34,15 +34,14 @@ public:
 	bool Update(float frame_time);
 	void Render();
 private:
-	void InitFont();
-	void CleanUpFont();
-	void DrawHUD();
-	void SetupLights();
-	void SetupCamera();
+	//void CleanUpFont();
+	//void DrawHUD();
+	//void SetupLights();
+	//void SetupCamera();
 
 	StateManager* m_stateManager;
 
-	gef::SpriteRenderer* sprite_renderer_;
+	/*gef::SpriteRenderer* sprite_renderer_;
 	gef::Renderer3D* renderer_3d_;
 	gef::InputManager* input_manager_;
 	gef::Font* font_;
@@ -56,7 +55,7 @@ private:
 	float near_plane_;
 	float far_plane_;
 
-	World* world;
+	World* world;*/
 
 	//PrimitiveBuilder* primitive_builder_;
 };

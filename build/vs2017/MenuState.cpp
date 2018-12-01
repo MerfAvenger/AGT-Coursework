@@ -16,7 +16,7 @@ void MenuState::Init(gef::Platform &platform)
 	Run();
 }
 
-int MenuState::Update(gef::Platform &platform)
+int MenuState::Update(gef::Platform &platform, float deltaTime)
 {
 	return -1;
 }

@@ -1,6 +1,7 @@
 #include "StateManager.h"
 #include "SplashState.h"
 #include "MenuState.h"
+#include "GameState.h"
 #include "system/platform.h"
 
 
@@ -18,6 +19,9 @@ BaseState* StateManager::Morph(APPLICATION_STATE newState, gef::Platform &platfo
 		newBaseState = new MenuState();
 		static_cast<MenuState*>(newBaseState)->Init(platform);
 		return newBaseState;
+	case game:
+		newBaseState = new GameState();
+		static_cast<MenuState*>(newBaseState)->Init(platform);
 	case def:
 		return nullptr;
 	default:
@@ -42,9 +46,9 @@ StateManager::~StateManager()
 	m_state = nullptr;
 }
 
-int StateManager::Update(gef::Platform &platform)
+int StateManager::Update(gef::Platform &platform, float deltaTime)
 {
-	return m_state->Update(platform);
+	return m_state->Update(platform, deltaTime);
 }
 
 void StateManager::Render(gef::Platform & platform)
@@ -54,12 +58,26 @@ void StateManager::Render(gef::Platform & platform)
 
 void StateManager::StateUpdate(gef::Platform &platform)
 {
-	//while(returnValue != -1)
+
+	if (m_lastState != m_currentState)
 	{
-		if (m_lastState != m_currentState)
+		gef::SpriteRenderer* renderer;
+		gef::Font* font;
+
+		if (m_currentState == game && m_lastState == splash)
 		{
-			//Set up appropriate child state if the state has changed
-			m_state = Morph(m_currentState, platform);
-		}	
+			renderer = static_cast<SplashState*>(m_state)->passRenderer();
+			font = static_cast<SplashState*>(m_state)->passFonts();
+		}
+		//Set up appropriate child state if the state has changed
+		m_state = Morph(m_currentState, platform);
+
+		if (font && renderer)
+		{
+			static_cast<GameState*>(m_state)->PassRenderer(renderer, font);
+		}
+
+		m_lastState = m_currentState;
 	}	
+
 }

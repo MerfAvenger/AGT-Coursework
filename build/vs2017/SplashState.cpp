@@ -21,19 +21,8 @@ SplashState::~SplashState()
 void SplashState::Init(gef::Platform &platform)
 {
 	InitRendering(platform);
-	InitCamera();
 
 	InitFont(platform);
-}
-
-void SplashState::InitCamera()
-{
-	camera_eye_ = gef::Vector4(-500.0f, 5.0f, 5.0f);
-	camera_lookat_ = gef::Vector4(0.0f, 0.0f, 0.0f);
-	camera_up_ = gef::Vector4(0.0f, 1.0f, 0.0f);
-	camera_fov_ = gef::DegToRad(45.0f);
-	near_plane_ = 0.01f;
-	far_plane_ = 100.f;
 }
 
 void SplashState::InitRendering(gef::Platform &platform)
@@ -62,15 +51,9 @@ void SplashState::InitFont(gef::Platform &platform)
 	m_font->Load("comic_sans");
 }
 
-int SplashState::Update(gef::Platform &platform)
+int SplashState::Update(gef::Platform &platform, float deltaTime)
 {
-	bool cont = true;
-	int returnValue = 0;
-
-	//while (cont)
-	{
-		Render(platform);
-	}
+	int returnValue = 3;
 
 	return returnValue;
 }

@@ -23,7 +23,7 @@ public:
 
 	StateManager(gef::Platform &platform);
 	~StateManager();
-	int Update(gef::Platform &platform);
+	int Update(gef::Platform &platform, float deltaTime);
 	void Render(gef::Platform &platform);
 
 	void StateUpdate(gef::Platform &platform);

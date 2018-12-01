@@ -10,7 +10,7 @@ void BaseState::InitRendering(gef::Platform & platform)
 {
 }
 
-int BaseState::Update(gef::Platform &platform)
+int BaseState::Update(gef::Platform &platform, float deltaTime)
 {
 	return -1;
 }

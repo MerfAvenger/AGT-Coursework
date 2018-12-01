@@ -18,13 +18,6 @@ namespace gef
 
 class BaseState
 {
-protected:
-	gef::Vector4 camera_eye_;
-	gef::Vector4 camera_lookat_;
-	gef::Vector4 camera_up_;
-	float camera_fov_;
-	float near_plane_;
-	float far_plane_;
 
 protected:
 	virtual void Init(gef::Platform &platform);
@@ -38,7 +31,7 @@ public:
 	BaseState();
 	~BaseState();
 
-	virtual int Update(gef::Platform &platform);
+	virtual int Update(gef::Platform &platform, float deltaTime);
 	virtual void Render(gef::Platform &platform);
 };
 
