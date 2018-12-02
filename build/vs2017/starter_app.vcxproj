@@ -220,7 +220,6 @@
     <ClCompile Include="BaseState.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameState.cpp" />
-    <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="SplashState.cpp" />
     <ClCompile Include="StateManager.cpp" />
     <ClCompile Include="World.cpp" />
@@ -231,7 +230,6 @@
     <ClInclude Include="BaseState.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
-    <ClInclude Include="MenuState.h" />
     <ClInclude Include="SplashState.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="World.h" />

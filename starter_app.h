@@ -30,34 +30,19 @@ class StarterApp : public gef::Application
 public:
 	StarterApp(gef::Platform& platform);
 	void Init();
+	void InitRendering();
+	void InitFont();
 	void CleanUp();
 	bool Update(float frame_time);
 	void Render();
+
 private:
-	//void CleanUpFont();
-	//void DrawHUD();
-	//void SetupLights();
-	//void SetupCamera();
+
+	gef::Renderer3D* m_renderer3D;
+	gef::Font* m_font;
+	gef::SpriteRenderer* m_spriteRenderer;
 
 	StateManager* m_stateManager;
-
-	/*gef::SpriteRenderer* sprite_renderer_;
-	gef::Renderer3D* renderer_3d_;
-	gef::InputManager* input_manager_;
-	gef::Font* font_;
-
-	float fps_;
-
-	gef::Vector4 camera_eye_;
-	gef::Vector4 camera_lookat_;
-	gef::Vector4 camera_up_;
-	float camera_fov_;
-	float near_plane_;
-	float far_plane_;
-
-	World* world;*/
-
-	//PrimitiveBuilder* primitive_builder_;
 };
 
 #endif // _STARTER_APP_H

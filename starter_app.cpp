@@ -19,13 +19,33 @@
 
 
 StarterApp::StarterApp(gef::Platform& platform) :
-	Application(platform)
+	Application(platform),
+	m_spriteRenderer(NULL),
+	m_stateManager(NULL),
+	m_font(NULL)
 {
 }
 
 void StarterApp::Init()
 {
+	InitRendering();
+
 	m_stateManager = new StateManager(platform_);
+	m_stateManager->StateUpdate(platform_, m_spriteRenderer, m_renderer3D);
+}
+
+void StarterApp::InitRendering()
+{
+	m_spriteRenderer = gef::SpriteRenderer::Create(platform_);
+	m_renderer3D = gef::Renderer3D::Create(platform_);
+	
+	InitFont();
+}
+
+void StarterApp::InitFont()
+{
+	m_font = new gef::Font(platform_);
+	m_font->Load("comic_sans");
 }
 
 void StarterApp::CleanUp()
@@ -35,11 +55,19 @@ void StarterApp::CleanUp()
 
 bool StarterApp::Update(float frame_time)
 {
-	m_stateManager->Update(platform_, frame_time);
+	int rVal = m_stateManager->Update(platform_, frame_time);
+
+	if (rVal != 0)
+	{
+		m_stateManager->SetState(APPLICATION_STATE(rVal));
+		m_stateManager->StateUpdate(platform_, m_spriteRenderer, m_renderer3D);
+	}
+
+	return true;
 }
 
 void StarterApp::Render()
 {
-	m_stateManager->Render(platform_);
+	m_stateManager->Render(platform_, m_spriteRenderer, m_renderer3D);
 }
 

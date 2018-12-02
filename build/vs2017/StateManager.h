@@ -24,9 +24,11 @@ public:
 	StateManager(gef::Platform &platform);
 	~StateManager();
 	int Update(gef::Platform &platform, float deltaTime);
-	void Render(gef::Platform &platform);
+	void Render(gef::Platform &platform, gef::SpriteRenderer * spriteRenderer, gef::Renderer3D * renderer3D);
 
-	void StateUpdate(gef::Platform &platform);
+	void SetState(APPLICATION_STATE state);
+
+	void StateUpdate(gef::Platform &platform, gef::SpriteRenderer * spriteRenderer, gef::Renderer3D * renderer3D);
 
 };
 

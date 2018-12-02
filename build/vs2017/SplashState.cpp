@@ -20,55 +20,46 @@ SplashState::~SplashState()
 
 void SplashState::Init(gef::Platform &platform)
 {
-	InitRendering(platform);
+	m_splashTime = 0.0f;
 
-	InitFont(platform);
-}
-
-void SplashState::InitRendering(gef::Platform &platform)
-{
-	m_spriteRenderer = gef::SpriteRenderer::Create(platform);
 	m_imageLoader = new gef::PNGLoader();
 	m_background = new gef::ImageData();
 	m_bgSprite = new gef::Sprite();
 
 	m_imageLoader->Load("splashTest.png", platform, *m_background);
-	
+
 	if (m_background)
 	{
 		m_bgTex = gef::Texture::Create(platform, *m_background);
 
 		m_bgSprite->set_height(544.0f);
 		m_bgSprite->set_width(900.0f);
-		m_bgSprite->set_position(0.0f, 0.0f, 0.0f);
+		m_bgSprite->set_position(m_bgSprite->width() / 2, m_bgSprite->height() / 2, 0.0f);
 		m_bgSprite->set_texture(m_bgTex);
 	}
 }
 
-void SplashState::InitFont(gef::Platform &platform)
-{
-	m_font = new gef::Font(platform);
-	m_font->Load("comic_sans");
-}
-
 int SplashState::Update(gef::Platform &platform, float deltaTime)
 {
-	int returnValue = 3;
+	m_splashTime += deltaTime;
 
-	return returnValue;
+	if (m_splashTime >= MAX_SPLASH)
+	{
+		return 3;
+	}
+
+	return 0;
 }
 
 void SplashState::Cleanup()
 {
 }
 
-void SplashState::Render(gef::Platform &platform)
+void SplashState::Render(gef::Platform &platform, gef::SpriteRenderer* spriteRenderer, gef::Renderer3D* renderer3D)
 {
-	//m_spriteRenderer->set_projection_matrix(platform.PerspectiveProjectionFov(camera_fov_, (float)platform.width() / (float)platform.height(), near_plane_, far_plane_));
+	spriteRenderer->Begin(false);
 
-	m_spriteRenderer->Begin(false);
+	spriteRenderer->DrawSprite(*m_bgSprite);
 
-	m_spriteRenderer->DrawSprite(*m_bgSprite);
-
-	m_spriteRenderer->End();
+	spriteRenderer->End();
 }
