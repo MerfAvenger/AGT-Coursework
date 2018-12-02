@@ -19,6 +19,8 @@ GameState::~GameState()
 void GameState::Init(gef::Platform & platform)
 {
 	inputManager = gef::InputManager::Create(platform);
+
+	m_world = new World(platform);
 	SetupCamera();
 }
 
@@ -89,7 +91,8 @@ void GameState::Render(gef::Platform & platform, gef::SpriteRenderer * spriteRen
 {
 	renderer3D->Begin(true);
 
-	std::for_each(m_world->WorldObjects().begin(), m_world->WorldObjects().end(), [=](GameObject obj) {renderer3D->DrawMesh(obj); });
+	for (int i = 0; i < m_world->WorldObjects().size(); i++)
+		renderer3D->DrawMesh(m_world->WorldObjects().at(i));
 
 	renderer3D->End();
 

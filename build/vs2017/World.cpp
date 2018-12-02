@@ -15,7 +15,7 @@ World::~World()
 void World::Init(gef::Platform &platform)
 {
 	meshReference.push_back(InitMesh("ball1.scn", modelScene, platform));
-	m_worldObjects.emplace_back(GameObject(gef::Vector4(0.0f, 0.0f, 0.0f), meshReference.back()));
+	m_worldObjects.push_back(GameObject(gef::Vector4(0.0f, 0.0f, 0.0f), meshReference.back()));
 
 	//Keep track of the player
 	player = new GameObject();
@@ -23,7 +23,7 @@ void World::Init(gef::Platform &platform)
 
 	//Add additional world objects
 	meshReference.push_back(InitMesh("ball2.scn", modelScene, platform));
-	m_worldObjects.emplace_back(GameObject(gef::Vector4(0.0f, 0.0f, 150.0f), meshReference.back()));
+	m_worldObjects.push_back(GameObject(gef::Vector4(0.0f, 0.0f, 150.0f), meshReference.back()));
 }
 
 gef::Mesh* World::InitMesh(const char* fileName, gef::Scene* scene, gef::Platform &platform)
