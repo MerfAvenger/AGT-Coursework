@@ -57,6 +57,9 @@
     <ClCompile Include="GameState.cpp">
       <Filter>Source Files\State</Filter>
     </ClCompile>
+    <ClCompile Include="Creature.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\primitive_builder.h">
@@ -82,6 +85,9 @@
     </ClInclude>
     <ClInclude Include="GameState.h">
       <Filter>Header Files\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Creature.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -5,6 +5,8 @@
 #include "graphics\font.h"
 #include <maths/math_utils.h>
 #include <algorithm>
+#include "system/platform.h"
+#include "input/keyboard.h"
 
 GameState::GameState() : 
 	BaseState()
@@ -80,19 +82,28 @@ int GameState::Update(gef::Platform & platform, float deltaTime)
 		gef::Keyboard* keyboard = inputManager->keyboard();
 		if (keyboard)
 		{
-
+			if (keyboard->IsKeyDown(gef::Keyboard::KC_SPACE))
+				m_world->Player()->Move(gef::Vector4(0.0f, 1.0f, 1.0f), m_world, deltaTime);
 		}
 	}
 
 	return 0;
 }
 
-void GameState::Render(gef::Platform & platform, gef::SpriteRenderer * spriteRenderer, gef::Renderer3D * renderer3D)
+void GameState::Render(gef::Platform &platform, gef::SpriteRenderer * spriteRenderer, gef::Renderer3D * renderer3D)
 {
+	gef::Matrix44 projection_matrix;
+	gef::Matrix44 view_matrix;
+
+	projection_matrix = platform.PerspectiveProjectionFov(camera_fov_, (float)platform.width() / (float)platform.height(), near_plane_, far_plane_);
+	view_matrix.LookAt(camera_eye_, camera_lookat_, camera_up_);
+	renderer3D->set_projection_matrix(projection_matrix);
+	renderer3D->set_view_matrix(view_matrix);
+
 	renderer3D->Begin(true);
 
 	for (int i = 0; i < m_world->WorldObjects().size(); i++)
-		renderer3D->DrawMesh(m_world->WorldObjects().at(i));
+		renderer3D->DrawMesh(*m_world->WorldObjects().at(i));
 
 	renderer3D->End();
 

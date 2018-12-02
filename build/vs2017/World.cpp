@@ -15,15 +15,14 @@ World::~World()
 void World::Init(gef::Platform &platform)
 {
 	meshReference.push_back(InitMesh("ball1.scn", modelScene, platform));
-	m_worldObjects.push_back(GameObject(gef::Vector4(0.0f, 0.0f, 0.0f), meshReference.back()));
 
 	//Keep track of the player
-	player = new GameObject();
-	*player = m_worldObjects.at(0);
+	player = new Creature(gef::Vector4(0.0f, 0.0f, 0.0f),meshReference.back(), 100.0f, "pet" );
+	m_worldObjects.push_back(player);
 
 	//Add additional world objects
 	meshReference.push_back(InitMesh("ball2.scn", modelScene, platform));
-	m_worldObjects.push_back(GameObject(gef::Vector4(0.0f, 0.0f, 150.0f), meshReference.back()));
+	m_worldObjects.push_back(new GameObject(gef::Vector4(0.0f, 0.0f, 250.0f), meshReference.back(), "ball"));
 }
 
 gef::Mesh* World::InitMesh(const char* fileName, gef::Scene* scene, gef::Platform &platform)
@@ -51,15 +50,28 @@ gef::Mesh* World::GetFirstMesh(gef::Scene* scene, gef::Platform &platform)
 	return mesh;
 }
 
-bool World::CheckCollisions(gef::Vector4 newPosition)
+bool World::CheckCollisions(gef::Vector4 newPosition, char* tag)
 {
-	if(m_worldObjects.size() > 1)
+	GameObject searchObject;
+
+	for (GameObject* worldObject : m_worldObjects)
 	{
-		for(UInt16 i = 0; i < m_worldObjects.size() - 1; i++)
+		if (worldObject->Tag() == tag)
 		{
-			for(int c = i + 1; c < m_worldObjects.size(); c++)
+			searchObject = *worldObject;
+			break;
+		}
+	}
+
+	searchObject.SetPosition(searchObject.GetPosition() + newPosition);
+
+	for (GameObject* worldObject : m_worldObjects)
+	{
+		if(worldObject->Tag() != tag)
+		{
+			if(AABB(searchObject, *worldObject))
 			{
-				return AABB(m_worldObjects[i], m_worldObjects[c]);
+				return false;
 			}
 		}
 	}

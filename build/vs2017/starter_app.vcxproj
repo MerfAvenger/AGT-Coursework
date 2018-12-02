@@ -218,6 +218,7 @@
     <ClCompile Include="..\..\primitive_builder.cpp" />
     <ClCompile Include="..\..\starter_app.cpp" />
     <ClCompile Include="BaseState.cpp" />
+    <ClCompile Include="Creature.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="GameState.cpp" />
     <ClCompile Include="SplashState.cpp" />
@@ -228,6 +229,7 @@
     <ClInclude Include="..\..\primitive_builder.h" />
     <ClInclude Include="..\..\starter_app.h" />
     <ClInclude Include="BaseState.h" />
+    <ClInclude Include="Creature.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="GameState.h" />
     <ClInclude Include="SplashState.h" />

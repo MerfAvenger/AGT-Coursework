@@ -60,7 +60,7 @@ void StateManager::SetState(APPLICATION_STATE state)
 	m_currentState = state;
 }
 
-void StateManager::StateUpdate(gef::Platform &platform, gef::SpriteRenderer * spriteRenderer, gef::Renderer3D * renderer3D)
+void StateManager::StateUpdate(gef::Platform &platform, gef::SpriteRenderer *spriteRenderer, gef::Renderer3D * renderer3D)
 {
 
 	if (m_lastState != m_currentState)

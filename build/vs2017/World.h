@@ -1,25 +1,13 @@
 #ifndef WORLD_H
 #define WORLD_H
 #include "maths/vector4.h"
-#include "GameObject.h"
 #include <vector>
 #include <list>
 #include "graphics/scene.h"
+#include "Creature.h"
 
 class World
 {
-public:
-	World(gef::Platform& platform);
-	~World();
-	void Init(gef::Platform& platform);
-
-	gef::Mesh* InitMesh(const char* fileName, gef::Scene* scene, gef::Platform& platform);
-
-	bool CheckCollisions(gef::Vector4 newPosition);
-
-	const std::vector<GameObject> WorldObjects() { return m_worldObjects; }
-	GameObject* Player() { return player; }
-
 private:
 
 	gef::Mesh* GetFirstMesh(gef::Scene* scene, gef::Platform &platform);
@@ -29,9 +17,21 @@ private:
 	bool AABB(GameObject obj1, GameObject obj2);
 
 	gef::Scene* modelScene;
-	GameObject* player;
-	std::vector<GameObject> m_worldObjects;
+	Creature* player;
+	std::vector<GameObject*> m_worldObjects;
 	std::list<gef::Mesh*> meshReference;
+
+public:
+	World(gef::Platform& platform);
+	~World();
+	void Init(gef::Platform& platform);
+
+	gef::Mesh* InitMesh(const char* fileName, gef::Scene* scene, gef::Platform& platform);
+
+	bool CheckCollisions(gef::Vector4 newPosition, char* tag);
+
+	const std::vector<GameObject*> WorldObjects() { return m_worldObjects; }
+	Creature* Player() { return player; }
 
 };
 
