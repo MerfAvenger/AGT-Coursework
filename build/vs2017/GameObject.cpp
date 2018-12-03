@@ -23,6 +23,7 @@ void GameObject::UpdateTransformFromVectorPosition(gef::Vector4 position)
 {
 	gef::Matrix44 tempMatrix = this->transform();
 	tempMatrix.SetTranslation(position);
+	
 
 	set_transform(tempMatrix);
 }

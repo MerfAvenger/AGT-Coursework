@@ -7,7 +7,7 @@ class Creature :
 {
 private:
 	float m_health;
-	const float SPEED = 1000.0f;
+	const float SPEED = 100.0f;
 public:
 	Creature(gef::Vector4 position, gef::Mesh* mesh, float health, char* tag);
 	~Creature();

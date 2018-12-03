@@ -82,8 +82,18 @@ int GameState::Update(gef::Platform & platform, float deltaTime)
 		gef::Keyboard* keyboard = inputManager->keyboard();
 		if (keyboard)
 		{
-			if (keyboard->IsKeyDown(gef::Keyboard::KC_SPACE))
-				m_world->Player()->Move(gef::Vector4(0.0f, 1.0f, 1.0f), m_world, deltaTime);
+			if (keyboard->IsKeyDown(gef::Keyboard::KC_RIGHT))
+				m_world->Player()->Move(gef::Vector4(0.0f, 0.0f, 1.0f), m_world, deltaTime);
+
+			if (keyboard->IsKeyDown(gef::Keyboard::KC_LEFT))
+				m_world->Player()->Move(gef::Vector4(0.0f, 0.0f, -1.0f), m_world, deltaTime);
+
+			if (keyboard->IsKeyDown(gef::Keyboard::KC_UP))
+				m_world->Player()->Move(gef::Vector4(0.0f, 1.0f, 0.0f), m_world, deltaTime);
+
+			if (keyboard->IsKeyDown(gef::Keyboard::KC_DOWN))
+				m_world->Player()->Move(gef::Vector4(0.0f, -1.0f, 0.0f), m_world, deltaTime);
+		
 		}
 	}
 
