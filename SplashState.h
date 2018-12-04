@@ -19,7 +19,7 @@ private:
 	gef::Sprite* m_bgSprite;
 
 	float m_splashTime; 
-	const float MAX_SPLASH = 3.0f;
+	const float MAX_SPLASH = 1.0f;
 
 public:
 	SplashState();

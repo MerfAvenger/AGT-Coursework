@@ -22,7 +22,7 @@ void World::Init(gef::Platform &platform)
 
 	//Add additional world objects
 	meshReference.push_back(InitMesh("ball2.scn", modelScene, platform));
-	m_worldObjects.push_back(new GameObject(gef::Vector4(0.0f, 0.0f, 250.0f), meshReference.back(), "ball"));
+	m_worldObjects.push_back(new GameObject(gef::Vector4(-10.0f, 0.0f, 250.0f), meshReference.back(), "ball"));
 }
 
 gef::Mesh* World::InitMesh(const char* fileName, gef::Scene* scene, gef::Platform &platform)
@@ -82,14 +82,27 @@ bool World::CheckCollisions(gef::Vector4 newPosition, char* tag)
 bool World::AABB(GameObject obj1, GameObject obj2)
 {
 
+	obj1.mesh()->aabb().Transform(obj1.transform());
+	obj2.mesh()->aabb().Transform(obj2.transform());
+
 	return(
-		AABBMinVertexToWorldPosition(obj1).x() < AABBMaxVertexToWorldPosition(obj2).x() &&
-		AABBMinVertexToWorldPosition(obj1).y() < AABBMaxVertexToWorldPosition(obj2).y() &&
-		AABBMinVertexToWorldPosition(obj1).z() < AABBMaxVertexToWorldPosition(obj2).z() &&
-		AABBMaxVertexToWorldPosition(obj1).x() > AABBMinVertexToWorldPosition(obj2).x() &&
-		AABBMaxVertexToWorldPosition(obj1).y() > AABBMinVertexToWorldPosition(obj2).y() &&
-		AABBMaxVertexToWorldPosition(obj1).z() > AABBMinVertexToWorldPosition(obj2).z()
-		);
+		obj1.mesh()->aabb().min_vtx().x() < obj2.mesh()->aabb().max_vtx().x() &&
+		obj1.mesh()->aabb().min_vtx().y() < obj2.mesh()->aabb().max_vtx().y() &&
+		obj1.mesh()->aabb().min_vtx().z() < obj2.mesh()->aabb().max_vtx().z() &&
+		obj1.mesh()->aabb().max_vtx().x() < obj2.mesh()->aabb().min_vtx().x() &&
+		obj1.mesh()->aabb().max_vtx().y() < obj2.mesh()->aabb().min_vtx().y() &&
+		obj1.mesh()->aabb().max_vtx().z() < obj2.mesh()->aabb().min_vtx().z()
+		);														
+
+
+	//return(
+	//	AABBMinVertexToWorldPosition(obj1).x() < AABBMaxVertexToWorldPosition(obj2).x() &&
+	//	AABBMinVertexToWorldPosition(obj1).y() < AABBMaxVertexToWorldPosition(obj2).y() &&
+	//	AABBMinVertexToWorldPosition(obj1).z() < AABBMaxVertexToWorldPosition(obj2).z() &&
+	//	AABBMaxVertexToWorldPosition(obj1).x() > AABBMinVertexToWorldPosition(obj2).x() &&
+	//	AABBMaxVertexToWorldPosition(obj1).y() > AABBMinVertexToWorldPosition(obj2).y() &&
+	//	AABBMaxVertexToWorldPosition(obj1).z() > AABBMinVertexToWorldPosition(obj2).z()
+	//	);
 }
 
 gef::Vector4 World::AABBMaxVertexToWorldPosition(GameObject obj)

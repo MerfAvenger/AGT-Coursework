@@ -1,6 +1,5 @@
 #include "StateManager.h"
 #include "SplashState.h"
-//#include "MenuState.h"
 #include "GameState.h"
 #include "system/platform.h"
 

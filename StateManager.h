@@ -4,7 +4,6 @@
 #include "BaseState.h"
 
 //Forward declerations
-class BaseState;
 enum APPLICATION_STATE;
 
 class StateManager
@@ -29,6 +28,8 @@ public:
 	void SetState(APPLICATION_STATE state);
 
 	void StateUpdate(gef::Platform &platform, gef::SpriteRenderer * spriteRenderer, gef::Renderer3D * renderer3D);
+	const APPLICATION_STATE StateInfo() { return m_currentState; };
+	const BaseState* State() { return m_state; };
 
 };
 

@@ -17,7 +17,6 @@ Creature::~Creature()
 void Creature::Move(gef::Vector4 moveDirection, World* world, float deltaTime)
 {
 	gef::Vector4 newPosition = GetPosition() + (moveDirection * SPEED * deltaTime);
-	newPosition.set_w(1.0f);
 
 	if(world->CheckCollisions(newPosition, m_tag))
 	{
